@@ -4,82 +4,159 @@
 
         <div class="wrap-breadcrumb">
             <ul>
-                <li class="item-link"><a href="#" class="link">home</a></li>
-                <li class="item-link"><span>login</span></li>
+                <li class="item-link"><a href="" class="link">home</a></li>
+                <li class="item-link"><span>Cart</span></li>
             </ul>
         </div>
         <div class=" main-content-area">
+            @if (Cart::instance('cart')->count() > 0)
+                <div class="wrap-iten-in-cart">
+                    @if (Session::has('success_message'))
+                        <div class="alert alert-success">
+                            <Strong>Success</Strong> {{ Session::get('success_message') }}
+                        </div>
+                    @endif
+                    @if (Cart::instance('cart')->count() > 0)
+                    <h3 class="box-title">Products Name</h3>
+                    <ul class="products-cart">
+                        @foreach (Cart::instance('cart')->content() as $item)
+                            <li class="pr-cart-item">
+                                <div class="product-image">
+                                    <figure><img src="{{ asset('assets/images/products') }}/{{$item->model->image}}" alt="{{$item->model->name}}"></figure>
+                                </div>
+                                <div class="product-name">
+                                    <a class="link-to-product" href="{{ route('product.details', ['slug'=>$item->model->slug]) }}">{{$item->model->name}}</a>
+                                </div>
+
+                                {{-- product attribute --}}
+                                @foreach ($item->options as $key=>$value)
+                                    <div style="vertical-align:middle; width: 180px;">
+                                        <p style="font-weight: bold"><strong>{{$key}} : {{$value}}</strong></p>
+                                    </div>
+                                @endforeach
+                                {{-- @if ($item->model->sale_price > 0 )
+                                <div class="price-field produtc-price"><p class="price">${{$item->model->sale_price}}</p></div>
+                                @else
+                                <div class="price-field produtc-price"><p class="price">${{$item->model->regular_price}}</p></div>
+                                @endif --}}
+                                <div class="price-field produtc-price"><p class="price">${{$item->model->regular_price}}</p></div>
+                                
+                                <div class="quantity">
+                                    <div class="quantity-input">
+                                        <input type="text" name="product-quatity" value="{{ $item->qty }}" data-max="120" pattern="[0-9]*" >
+                                        <a class="btn btn-increase" href="#" wire:click.prevent="increaseQty('{{$item->rowId}}')"></a>
+                                        <a class="btn btn-reduce" href="#" wire:click.prevent="decreaseQty('{{$item->rowId}}')"></a>
+                                    </div>
+                                    <p class="text-center"><a href="#" wire:click.prevent="saveForLater('{{ $item->rowId }}')">Save For Later</a></p>
+                                </div>
+                                <div class="price-field sub-total"><p class="price">${{$item->subtotal}}</p></div>
+                                <div class="delete">
+                                    <a href="#" class="btn btn-delete" title="" wire:click.prevent="delCart('{{$item->rowId}}')">
+                                        <span>Delete from your cart</span>
+                                        <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                    
+                    @else
+                    <p>No item in Cart</p>
+                    @endif
+                </div>
+
+                <div class="summary">
+                    <div class="order-summary">
+                        <h4 class="title-box">Order Summary</h4>
+                        <p class="summary-info"><span class="title">Subtotal</span><b class="index">${{ Cart::instance('cart')->subtotal() }}</b></p>
+                        @if (Session::has('coupon'))
+                            <p class="summary-info"><span class="title">Discount ({{ Session::get('coupon')['code'] }}) </span><b class="index"> -${{number_format($discount, 2)}}</b></p>
+                            <p class="summary-info"><span class="title">Subtotal(With Discount) ({{ config('cart.tax')}})%</span><b class="index">${{number_format($subtotalWithDiscount, 2)}}</b></p>
+                            <p class="summary-info"><span class="title">Tax ({{ config('cart.tax')}})%</span><b class="index">${{number_format($taxWithDiscount,2)}}</b></p>
+                            <p class="summary-info total-info "><span class="title">Total</span><b class="index">${{number_format($totalWithDiscount, 2)}}</b></p>
+                            <label class="checkbox-field">
+                                <input class="frm-input " name="no-coupon" id="no-coupon" value="" type="checkbox" wire:click.prevent="removeCoupon"><span> Shopping without promo code</span>
+                            </label>
+                        @else
+                            <p class="summary-info"><span class="title">Tax</span><b class="index">${{ Cart::instance('cart')->tax() }}</b></p>
+                            <p class="summary-info"><span class="title">Shipping</span><b class="index">Free Shipping</b></p>
+                            <p class="summary-info total-info "><span class="title">Total</span><b class="index">${{ Cart::instance('cart')->total() }}</b></p>
+                        @endif
+                        
+                    </div>
+                    
+                    <div class="checkout-info">
+                        @if (!Session::has('coupon'))
+                        <label class="checkbox-field">
+                            <input class="frm-input " name="have-code" id="have-code" value="" type="checkbox" wire:model="haveCouponCode"><span>I have promo code</span>
+                        </label>
+                            @if ($haveCouponCode == 1)
+                            {{-- coupon input form --}}
+                            <div class="summary-item">
+                                <form action="" wire:submit.prevent="applyCouponCode">
+                                    <h4 class="title-box">Coupon Code</h4>
+                                    @if (Session::has('coupon_message'))
+                                        <div class="alert alert-danger" role="alert">{{ Session::get('coupon_message') }}</div>
+                                    @endif
+                                    <p class="row-in-form">
+                                        <input type="text" name="coupon-code" wire:model="couponCode" placeholder="Enter your coupon code here" />
+                                    </p>
+                                    <button type="submit" class="btn btn-small">Apply</button>
+                                </form>
+                            </div>
+                            @endif
+                    @endif
+                        <a class="btn btn-checkout" href="#" wire:click.prevent="checkOut">Check out</a>
+                        <a class="link-to-shop" href="{{ route('product.shop') }}">Continue Shopping<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="update-clear">
+                        <a class="btn btn-clear" href="#" wire:click.prevent="delAll()">Clear Shopping Cart</a>
+                        <a class="btn btn-update" href="#">Update Shopping Cart</a>
+                    </div>
+                </div>
+            @else 
+                <div class="text-center" style="padding: 30px 0;">
+                    <h1>Your cart is empty!</h1>
+                    <p>Add item now</p>
+                    <a href="/shop" class="btn btn-success">Shop Now</a>
+                </div>
+            @endif
 
             <div class="wrap-iten-in-cart">
+                <h3 class="title-box" style="border-bottom: 1px solid; padding-bottom: 15px; ">{{Cart::instance('saveForLater')->count()}} item(s) Saved For Later</h3>
+                @if (Session::has('s_success_message'))
+                    <div class="alert alert-success">
+                        <Strong>Success</Strong> {{ Session::get('s_success_message') }}
+                    </div>
+                @endif
+                @if (Cart::instance('saveForLater')->count() > 0)
                 <h3 class="box-title">Products Name</h3>
                 <ul class="products-cart">
-                    <li class="pr-cart-item">
-                        <div class="product-image">
-                            <figure><img src="{{ asset('assets/images/products/digital_18.jpg') }}" alt=""></figure>
-                        </div>
-                        <div class="product-name">
-                            <a class="link-to-product" href="#">Radiant-360 R6 Wireless Omnidirectional Speaker [White]</a>
-                        </div>
-                        <div class="price-field produtc-price"><p class="price">$256.00</p></div>
-                        <div class="quantity">
-                            <div class="quantity-input">
-                                <input type="text" name="product-quatity" value="1" data-max="120" pattern="[0-9]*" >
-                                <a class="btn btn-increase" href="#"></a>
-                                <a class="btn btn-reduce" href="#"></a>
+                    @foreach (Cart::instance('saveForLater')->content() as $item)
+                        <li class="pr-cart-item">
+                            <div class="product-image">
+                                <figure><img src="{{ asset('assets/images/products') }}/{{$item->model->image}}" alt="{{$item->model->name}}"></figure>
                             </div>
-                        </div>
-                        <div class="price-field sub-total"><p class="price">$256.00</p></div>
-                        <div class="delete">
-                            <a href="#" class="btn btn-delete" title="">
-                                <span>Delete from your cart</span>
-                                <i class="fa fa-times-circle" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="pr-cart-item">
-                        <div class="product-image">
-                            <figure><img src="{{ asset('assets/images/products/digital_20.jpg') }}" alt=""></figure>
-                        </div>
-                        <div class="product-name">
-                            <a class="link-to-product" href="#">Radiant-360 R6 Wireless Omnidirectional Speaker [White]</a>
-                        </div>
-                        <div class="price-field produtc-price"><p class="price">$256.00</p></div>
-                        <div class="quantity">
-                            <div class="quantity-input">
-                                <input type="text" name="product-quatity" value="1" data-max="120" pattern="[0-9]*">
-                                <a class="btn btn-increase" href="#"></a>
-                                <a class="btn btn-reduce" href="#"></a>
+                            <div class="product-name">
+                                <a class="link-to-product" href="{{ route('product.details', ['slug'=>$item->model->slug]) }}">{{$item->model->name}}</a>
                             </div>
-                        </div>
-                        <div class="price-field sub-total"><p class="price">$256.00</p></div>
-                        <div class="delete">
-                            <a href="#" class="btn btn-delete" title="">
-                                <span>Delete from your cart</span>
-                                <i class="fa fa-times-circle" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </li>
+                            <div class="price-field produtc-price"><p class="price">${{$item->model->regular_price}}</p></div>
+                                <p class="text-center"><a href="#" wire:click.prevent="moveToCart('{{ $item->rowId }}')">Move To Cart</a></p>
+                            </div>
+                            
+                            <div class="delete">
+                                <a href="#" class="btn btn-delete" title="" wire:click.prevent="delSaved('{{$item->rowId}}')">
+                                    <span>Delete from saved item</span>
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </li>
+                    @endforeach
                 </ul>
-            </div>
-
-            <div class="summary">
-                <div class="order-summary">
-                    <h4 class="title-box">Order Summary</h4>
-                    <p class="summary-info"><span class="title">Subtotal</span><b class="index">$512.00</b></p>
-                    <p class="summary-info"><span class="title">Shipping</span><b class="index">Free Shipping</b></p>
-                    <p class="summary-info total-info "><span class="title">Total</span><b class="index">$512.00</b></p>
-                </div>
-                <div class="checkout-info">
-                    <label class="checkbox-field">
-                        <input class="frm-input " name="have-code" id="have-code" value="" type="checkbox"><span>I have promo code</span>
-                    </label>
-                    <a class="btn btn-checkout" href="checkout.html">Check out</a>
-                    <a class="link-to-shop" href="shop.html">Continue Shopping<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
-                </div>
-                <div class="update-clear">
-                    <a class="btn btn-clear" href="#">Clear Shopping Cart</a>
-                    <a class="btn btn-update" href="#">Update Shopping Cart</a>
-                </div>
+                
+                @else
+                <p>No item in Saved</p>
+                @endif
             </div>
 
             <div class="wrap-show-advance-info-box style-1 box-in-site">

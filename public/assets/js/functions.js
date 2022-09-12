@@ -64,20 +64,22 @@
                 });
                 $('.wrap-search-form .wrap-list-cate .list-cate').on('click', 'li', function (event) {
                     var _this 	 = $(this),
-						_value 	 = _this.attr('value'),
+						// _value 	 = _this.attr('value'),
+						_value 	 = _this.text(),
 						_content = _this.text(),
 						_title 	 = _this.text();
                     _content = _content.slice(0, 12);
                     _this.parent().siblings('a').text(_content).attr('title',_title);
-                    _this.parent().siblings('input[name="product-cate"]').val(_value);
+                    _this.parent().siblings('input[name="prodCat"]').val(_value);
+                    _this.parent().siblings('input[name="prodCatId"]').val(_this.data("id"));
                     _this.parent().slideUp();
                 });
 			}
-			if($("select:not(.except-chosen)").length > 0){
-				$("select:not(.except-chosen)").each(function(){
-					$(this).chosen();
-				});
-			}
+			// if($("select:not(.except-chosen)").length > 0){
+			// 	$("select:not(.except-chosen)").each(function(){
+			// 		$(this).chosen();
+			// 	});
+			// }
         },
 
 		mercado_toggle_slide_menu: function() {
