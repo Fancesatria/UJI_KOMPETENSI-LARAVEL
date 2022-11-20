@@ -83,7 +83,6 @@
                                         @foreach ($co as $c)
                                             <option value="{{$c->distance_km}}">{{ $c->country }}</option>
                                         @endforeach
-                                        
                                     </select>
                                 </p>
                                 <p class="row-in-form">
@@ -166,7 +165,7 @@
                                     </p>
                                     <p class="row-in-form">
                                         <label for="country">Country<span>*</span></label>
-                                        <select name="" class="form-control input-md" wire:model="country">
+                                        <select name="" class="form-control input-md" wire:model="ship_country">
                                             <option value="0">Select Country</option>
                                             @foreach ($co as $c)
                                                 <option value="{{$c->distance_km}}">{{ $c->country }}</option>
@@ -249,12 +248,12 @@
                                 <span>Debit/Credit Card</span>
                                 <span class="payment-desc">There are many variations of passages of Lorem Ipsum available</span>
                             </label>
-                            <label class="payment-method">
+                            {{-- <label class="payment-method">
                                 <input name="payment-method" id="payment-method-paypal" value="paypal" type="radio" wire:model="payMethod">
                                 <span>Paypal</span>
                                 <span class="payment-desc">You can pay with your credit</span>
                                 <span class="payment-desc">card if you don't have a paypal account</span>
-                            </label>
+                            </label> --}}
                             @error('payMethod')
                                 <p class="text-danger">{{$message}}</p>
                             @enderror

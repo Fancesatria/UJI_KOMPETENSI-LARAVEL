@@ -147,7 +147,7 @@
 
             <div class="wa-chat">
                 <a href=" https://wa.me/6289617320859?text=Hello,%20I%20have%20some%20questions" target="_blank">
-                    <img src="{{ asset('assets/images/wa.png')}}" alt="whatsapp logo" width="55px" height="55px">
+                    <img src="{{ asset('assets/images/wa.png')}}" alt="whatsapp logo" width="60px" height="60px">
                 </a>
             </div>
 		</div>

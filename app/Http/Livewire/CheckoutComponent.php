@@ -129,6 +129,7 @@ class CheckoutComponent extends Component
         
     }
 
+
     public function verifyForCheckout(){
         if (!Auth::check()) {
             return redirect()->route('login');

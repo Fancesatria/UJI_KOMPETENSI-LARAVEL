@@ -7376,8 +7376,8 @@ svg {
 }
 
 .wa-chat {
-    bottom: 25px;
-    left: 30px;
+    bottom: 90px;
+    right: 25px;
     position: fixed;
 }
 

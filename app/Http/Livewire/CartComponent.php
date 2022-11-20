@@ -143,10 +143,27 @@ class CartComponent extends Component
             ]);
         }
     }
+
+    //ongkir berdasarkan persenan
+    public function shippingCost(){
+        //hilangin dulu komanya krn sistem nganggap koma itu satuan bukan ribuan, 
+        //trs diconvert ke float
+        return (float) str_replace(',', '', Cart::instance('cart')->subtotal());
+    }
+
+    //buat total after shipping cost
+    public function totalCost(){
+        //hilangin dulu komanya krn sistem nganggap koma itu satuan bukan ribuan, 
+        //trs diconvert ke float
+        return (float) str_replace(',', '', Cart::instance('cart')->total());
+    }
     
     
     public function render()
     {
+        //ini nnti dipanggil ke view 
+        $shippingCharge = $this->shippingCost() * 5 / 100;
+        $totalCharge = $this->totalCost() + $shippingCharge;
         //COUPON 
         if (session()->has('coupon')) {
             if (Cart::instance('cart')->subtotal() < session()->get('coupon')['cart_value']) {
