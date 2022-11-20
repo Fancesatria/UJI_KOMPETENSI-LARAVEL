@@ -32,6 +32,6 @@ class OrderMail extends Mailable
     public function build()
     {
         // return $this->subject('Order Confirmation')->view('mails.order-mail');
-        return $this->subject('Attention!!')->view('mails.order-mail');
+        return $this->subject('Order Invoice')->view('mails.order-mail');
     }
 }

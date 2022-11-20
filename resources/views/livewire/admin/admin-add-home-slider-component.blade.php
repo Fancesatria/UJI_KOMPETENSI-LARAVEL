@@ -29,7 +29,7 @@
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Subtitle</label>
-                                <div class="col-md-4">
+                                <div class="col-md-4" wire:ignore>
                                     <input type="text" placeholder="Subtitle" class="form-control input-md" wire:model="subtitle">
                                     @error('subtitle')
                                         <p class="text-danger">{{$message}}</p>

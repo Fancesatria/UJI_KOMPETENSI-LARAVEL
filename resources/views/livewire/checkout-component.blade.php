@@ -50,7 +50,7 @@
                                 </p>
                                 <p class="row-in-form">
                                     <label for="phone">Phone number<span>*</span></label>
-                                    <input id="phone" type="number" name="phone" value="" placeholder="10 digits format" wire:model="mobile">
+                                    <input id="phone" type="number" name="phone" value="" placeholder="Phone number" wire:model="mobile">
                                     @error('mobile')
                                         <p class="text-danger">{{$message}}</p>
                                     @enderror
@@ -78,10 +78,13 @@
                                 </p>
                                 <p class="row-in-form">
                                     <label for="country">Country<span>*</span></label>
-                                    <input id="country" type="text" name="country" value="" placeholder="Country" wire:model="country">
-                                    @error('country')
-                                        <p class="text-danger">{{$message}}</p>
-                                    @enderror
+                                    <select name="" class="form-control input-md" wire:model="country">
+                                        <option value="0">Select Country</option>
+                                        @foreach ($co as $c)
+                                            <option value="{{$c->distance_km}}">{{ $c->country }}</option>
+                                        @endforeach
+                                        
+                                    </select>
                                 </p>
                                 <p class="row-in-form">
                                     <label for="city">Town / City<span>*</span></label>
@@ -163,10 +166,12 @@
                                     </p>
                                     <p class="row-in-form">
                                         <label for="country">Country<span>*</span></label>
-                                        <input id="country" type="text" name="country" value="" placeholder="Country" wire:model="ship_country">
-                                        @error('ship_country')
-                                            <p class="text-danger">{{$message}}</p>
-                                        @enderror
+                                        <select name="" class="form-control input-md" wire:model="country">
+                                            <option value="0">Select Country</option>
+                                            @foreach ($co as $c)
+                                                <option value="{{$c->distance_km}}">{{ $c->country }}</option>
+                                            @endforeach
+                                        </select>
                                     </p>
                                     <p class="row-in-form">
                                         <label for="city">Town / City<span>*</span></label>
@@ -256,7 +261,7 @@
                         </div>
 
                         @if (Session::has('checkout'))
-                            <p class="summary-info grand-total"><span>Grand Total</span> <span class="grand-total-price">${{Session::get('checkout')['total']}}</span></p>
+                            <p class="summary-info grand-total"><span>Grand Total</span> <span class="grand-total-price">${{Session::get('checkout')['total'] + $shipping_charge}}</span></p>
                         @endif
 
                         @if ($errors->isEmpty())
@@ -270,15 +275,31 @@
                         <button type="submit" class="btn btn-medium">Place order now</button>
                     </div>
                     <div class="summary-item shipping-method">
-                        <h4 class="title-box f-title">Shipping method</h4>
-                        <p class="summary-info"><span class="title">Flat Rate</span></p>
-                        <p class="summary-info"><span class="title">Fixed $50.00</span></p>
+                        <h4 class="title-box f-title">Shipping Options</h4>
+                        <p class="row-in-form">
+                            <select name="" class="form-control input-md" wire:model="select_expedition" wire:change="setShippingCharge">
+                                <option value="0">Select Shipping Agent</option>
+                                @foreach ($expedition as $ex)
+                                    <option value="{{$ex->cost_perkm}}">{{ $ex->name }} . . . . ($ {{$ex->cost_perkm}} perKm)</option>
+                                @endforeach
+                            </select>
+                            @if (Session::has('msg'))
+                                <p class="text-danger">{{Session::get('msg')}}</p>
+                            @endif
+                        </p>
+                        <p class="summary-info"><span class="title">Shipping Charge :</span></p>
+                        @if ($shipping_charge)
+                            <p class="summary-info">Fixed <span class="title" style="font-weight: bold">${{$shipping_charge}}</span></p>
+                        @else
+                            <p class="summary-info">Fixed <span class="title" style="font-weight: bold">$0.00</span></p>
+                        @endif
                         
-                        <a href="#" class="btn btn-small">Apply</a>
                     </div>
                 </div>
             </form>
         </div><!--end main content area-->
     </div><!--end container-->
-
+{{-- @php
+    dd($country_l);
+@endphp --}}
 </main>

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Setting;
 use App\Models\Shipping;
 use App\Models\OrderItem;
 use App\Models\Transaction;
@@ -29,5 +30,9 @@ class Order extends Model
 
     public function transaction(){
         return $this->hasOne(Transaction::class);
+    }
+
+    public function sender(){
+        return $this->belongsTo(Setting::class);
     }
 }

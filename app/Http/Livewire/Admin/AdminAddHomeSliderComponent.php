@@ -24,20 +24,20 @@ class AdminAddHomeSliderComponent extends Component
     public function updated($fields){
         $this->validateOnly($fields, [
             'title'=>'required',
-            'subtitle'=>'required | unique:products',
+            'subtitle'=>'required | unique:home_sliders',
             'price'=>'required | numeric',
             'link'=>'required',
-            'image'=>'required | mimes:jpeg, png | unique:home_slider'
+            'image'=>'required | mimes:jpg, jpeg, png | unique:home_sliders'
         ]);
     }
 
     public function addSlide(){
         $this->validate([
             'title'=>'required',
-            'subtitle'=>'required | unique:products',
+            'subtitle'=>'required',
             'price'=>'required | numeric',
             'link'=>'required',
-            'image'=>'required | mimes:jpeg, png | unique:home_slider'
+            'image'=>'required | mimes:jpg, jpeg, png'
         ]);
         $slider = new HomeSlider();
         $slider->title = $this->title;

@@ -51,24 +51,7 @@
                     <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                         <div class="contact-box contact-info">
                             <div class="wrap-map">
-                                <div class="mercado-google-maps"
-                                     id="az-google-maps57341d9e51968"
-                                     data-hue=""
-                                     data-lightness="1"
-                                     data-map-style="2"
-                                     data-saturation="-100"
-                                     data-modify-coloring="false"
-                                     data-title_maps="Kute themes"
-                                     data-phone="088-465 9965 02"
-                                     data-email="kutethemes@gmail.com"
-                                     data-address="Z115 TP. Thai Nguyen"
-                                     data-longitude="-0.120850"
-                                     data-latitude="51.508742"
-                                     data-pin-icon=""
-                                     data-zoom="16"
-                                     data-map-type="ROADMAP"
-                                     data-map-height="263">
-                                </div>
+                                <iframe src="{{$setting->map}}" width="100%" height="320" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                             <h2 class="box-title">Contact Detail</h2>
                             <div class="wrap-icon-box">

@@ -163,7 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Gloudemans\ShoppingCart\ShoppingcartServiceProvider::class,
         Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
-        
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -179,7 +179,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
-
+        
     ],
 
     /*
@@ -236,6 +236,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
         'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
+        'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
     ],
 
 ];

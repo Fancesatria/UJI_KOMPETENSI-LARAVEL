@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Home</title>
-        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/favicon.ico') }}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/logo2.png') }}">
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400italic,700,700italic,900,900italic&amp;subset=latin,latin-ext" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Open%20Sans:300,400,400italic,600,600italic,700,700italic&amp;subset=latin,latin-ext" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/animate.css') }}">
@@ -20,7 +20,7 @@
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" integrity="sha512-aEe/ZxePawj0+G2R+AaIxgrQuKT68I28qh+wgLrcAJOz3rxCP+TwrK5SPN+E5I+1IQjNtcfvb96HDagwrKRdBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.css" integrity="sha512-KRrxEp/6rgIme11XXeYvYRYY/x6XPGwk0RsIC6PyMRc072vj2tcjBzFmn939xzjeDhj0aDO7TDMd7Rbz3OEuBQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        
+
         @livewireStyles
     </head>
     <body class="home-page home-01 ">
@@ -48,29 +48,10 @@
                             </div>
                             <div class="topbar-menu right-menu">
                                 <ul>
-                                    <li class="menu-item lang-menu menu-item-has-children parent">
-                                        <a title="English" href="#"><span class="img label-before"><img src="{{ asset('assets/images/lang-en.png') }}" alt="lang-en"></span>English<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                                        <ul class="submenu lang" >
-                                            <li class="menu-item" ><a title="hungary" href="#"><span class="img label-before"><img src="{{ asset('assets/images/lang-hun.png') }}" alt="lang-hun"></span>Hungary</a></li>
-                                            <li class="menu-item" ><a title="german" href="#"><span class="img label-before"><img src="{{ asset('assets/images/lang-ger.png') }}" alt="lang-ger" ></span>German</a></li>
-                                            <li class="menu-item" ><a title="french" href="#"><span class="img label-before"><img src="{{ asset('assets/images/lang-fra.png') }}" alt="lang-fre"></span>French</a></li>
-                                            <li class="menu-item" ><a title="canada" href="#"><span class="img label-before"><img src="{{ asset('assets/images/lang-can.png') }}" alt="lang-can"></span>Canada</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item menu-item-has-children parent" >
-                                        <a title="Dollar (USD)" href="#">Dollar (USD)<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                                        <ul class="submenu curency" >
-                                            <li class="menu-item" >
-                                                <a title="Pound (GBP)" href="#">Pound (GBP)</a>
-                                            </li>
-                                            <li class="menu-item" >
-                                                <a title="Euro (EUR)" href="#">Euro (EUR)</a>
-                                            </li>
-                                            <li class="menu-item" >
-                                                <a title="Dollar (USD)" href="#">Dollar (USD)</a>
-                                            </li>
-                                        </ul>
-                                    </li>
+                                    <li class="menu-item"><a href="{{ route('privacy')}}" class="link-term">Privacy Policy</a></li>
+                                    <li class="menu-item"><a href="{{ route('term')}}" class="link-term">Terms & Conditions</a></li>
+                                    <li class="menu-item"><a href="{{ route('return')}}" class="link-term">Return Policy</a></li>
+
                                     @if (Route::has('login'))
                                         @auth
                                             @if (Auth::user()->utype === 'ADM')
@@ -120,14 +101,14 @@
                                                     <li class="menu-item">
                                                         <a href="{{ route('admin.settings') }}" title="Settings  ">Settings</a>
                                                     </li>
-                                                    
+
                                                     <li class="menu-item">
                                                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                                                     </li>
-                                                        
+
                                                     <form id="logout-form" action="{{ route('logout') }}" method="post">
                                                         @csrf
-                                                        
+
                                                     </form>
                                                 </ul>
                                             </li>
@@ -154,10 +135,10 @@
                                                     <li class="menu-item">
                                                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                                                     </li>
-                                                        
+
                                                     <form id="logout-form" action="{{ route('logout') }}" method="post">
                                                         @csrf
-                                                        
+
                                                     </form>
                                                 </ul>
                                             </li>
@@ -173,10 +154,10 @@
                     </div>
 
                     <div class="container">
-                        <div class="mid-section main-info-area">
+                        <div class="mid-section main-info-area" style="margin-bottom: 4px">
 
-                            <div class="wrap-logo-top left-section">
-                                <a href="index.html" class="link-to-home"><img src="{{ asset('assets/images/logo-top-1.png') }}" alt="mercado"></a>
+                            <div class="wrap-logo-top left-section" >
+                                <a href="/" class="link-to-home"><img src="{{ asset('assets/images/logo2.png') }}" alt="mercado" width="100px"></a>
                             </div>
 
                             @livewire('header-search-component')
@@ -186,7 +167,7 @@
                                 @livewire('wishlist-count-component')
                                 {{-- calling cart count component --}}
                                 @livewire('cart-count-component')
-                                
+
                                 <div class="wrap-icon-section show-up-after-1024">
                                     <a href="#" class="mobile-navigation">
                                         <span></span>
@@ -200,17 +181,6 @@
                     </div>
 
                     <div class="nav-section header-sticky">
-                        <div class="header-nav-section">
-                            <div class="container">
-                                <ul class="nav menu-nav clone-main-menu" id="mercado_haead_menu" data-menuname="Sale Info" >
-                                    <li class="menu-item"><a href="#" class="link-term">Weekly Featured</a><span class="nav-label hot-label">hot</span></li>
-                                    <li class="menu-item"><a href="#" class="link-term">Hot Sale items</a><span class="nav-label hot-label">hot</span></li>
-                                    <li class="menu-item"><a href="#" class="link-term">Top new items</a><span class="nav-label hot-label">hot</span></li>
-                                    <li class="menu-item"><a href="#" class="link-term">Top Selling</a><span class="nav-label hot-label">hot</span></li>
-                                    <li class="menu-item"><a href="#" class="link-term">Top rated items</a><span class="nav-label hot-label">hot</span></li>
-                                </ul>
-                            </div>
-                        </div>
 
                         <div class="primary-nav-section">
                             <div class="container">
@@ -219,7 +189,7 @@
                                         <a href="/" class="link-term mercado-item-title"><i class="fa fa-home" aria-hidden="true"></i></a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="about-us.html" class="link-term mercado-item-title">About Us</a>
+                                        <a href="{{route('aboutus')}}" class="link-term mercado-item-title">About Us</a>
                                     </li>
                                     <li class="menu-item">
                                         <a href="{{ url('/shop') }}" class="link-term mercado-item-title">Shop</a>
@@ -257,13 +227,18 @@
         <script src="{{ asset('assets/js/functions.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         {{-- timer --}}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/ 2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" integrity="sha512-GDey37RZAxFkpFeJorEUwNoIbkTwsyC736KNSYucu1WJWFK9qTdzYub8ATxktr6Dwke7nbFaioypzbDOQykoRg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         {{-- nouislider --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.js" integrity="sha512-EnXkkBUGl2gBm/EIZEgwWpQNavsnBbeMtjklwAa7jLj60mJk932aqzXFmdPKCG6ge/i8iOCK0Uwl1Qp+S0zowg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         {{-- tinymce = texteditor for textarea --}}
-        <script src="https://cdn.tiny.cloud/1/au57nr2f75d6jl01pdytjalbq5957iiw83suo1sxj6ve009a/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <script src="https://cdn.tiny.cloud/1/un6uebn6ylqt681bw5klrzgkmp39yiq2qj9o3q0em7fza3ly/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+        {{-- captcha v3 --}}
+        {{-- <script src="https://www.google.com/recaptcha/api.js?render=6LcV-A0jAAAAAKBm_zo6eahjvAwV4leHhkrnYyHa"></script> --}}
+        {{-- <script src="https://www.google.com/recaptcha/api.js"></script> --}}
 
+        {{-- Chat --}}
+        <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="9d4f1908-6f1d-4671-bb1f-1b4c879042c2";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
         @livewireScripts
         @stack('scripts')
     </body>

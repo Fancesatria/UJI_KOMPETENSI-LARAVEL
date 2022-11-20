@@ -69,7 +69,7 @@ class AdminAddProductComponent extends Component
             'short_desc'=>'required',
             'description'=>'required',
             'regular_price'=>'required | numeric',
-            'sale_price'=>'numeric',
+            'sale_price'=>'numeric|nullable',
             'SKU'=>'required | unique:products',
             'stock_status'=>'required',
             'image'=>'required | mimes:jpeg, png',
@@ -85,7 +85,7 @@ class AdminAddProductComponent extends Component
             'short_desc'=>'required',
             'description'=>'required',
             'regular_price'=>'required | numeric',
-            'sale_price'=>'numeric',
+            'sale_price'=>'numeric|nullable',
             'SKU'=>'required | unique:products',
             'stock_status'=>'required',
             'image'=>'required | mimes:jpeg, png',
@@ -127,14 +127,16 @@ class AdminAddProductComponent extends Component
         $product->save();
 
         //saving attributes to product
-        foreach ($this->attribute_values as $key=>$attribute_value) {
-            $attr_value = explode(',', $attribute_value);
-            foreach ($attr_value as $avalue) {
-                $attr_value = new AttributeValue();
-                $attr_value->product_attribute_id = $key;
-                $attr_value->value = $avalue;
-                $attr_value->product_id = $product->id;
-                $attr_value->save();
+        if(isset($this->attribute_values)){
+            foreach ($this->attribute_values as $key=>$attribute_value) {
+                $attr_value = explode(',', $attribute_value);
+                foreach ($attr_value as $avalue) {
+                    $attr_value = new AttributeValue();
+                    $attr_value->product_attribute_id = $key;
+                    $attr_value->value = $avalue;
+                    $attr_value->product_id = $product->id;
+                    $attr_value->save();
+                }
             }
         }
 

@@ -85,18 +85,18 @@ class AdminEditProductComponent extends Component
             'short_desc'=>'required',
             'description'=>'required',
             'regular_price'=>'required | numeric',
-            'sale_price'=>'numeric',
+            'sale_price'=>'numeric|nullable',
             'SKU'=>'required',
             'stock_status'=>'required',
             'category_id'=>'required',
             'quantity'=>'required | numeric'
         ]);
 
-        if ($this->newimage) {
-            $this->validateOnly($fields, [
-                'image'=>'required | mimes:jpg, jpeg, png', 
-            ]);
-        }
+        // if ($this->newimage) {
+        //     $this->validateOnly($fields, [
+        //         'image'=>'required | mimes:jpg, jpeg, png', 
+        //     ]);
+        // }
     }
 
     //add attribute editProduct
@@ -119,17 +119,17 @@ class AdminEditProductComponent extends Component
             'short_desc'=>'required',
             'description'=>'required',
             'regular_price'=>'required | numeric',
-            'sale_price'=>'numeric',
+            'sale_price'=>'numeric|nullable',
             'SKU'=>'required',
             'stock_status'=>'required',
             'category_id'=>'required ',
             'quantity'=>'required | numeric'
         ]);
-        if ($this->newimage) {
-            $this->validate([
-                'image'=>'required | mimes:jpg, jpeg, png', 
-            ]);
-        }
+        // if ($this->newimage) {
+        //     $this->validate([
+        //         'image'=>'required | mimes:jpg, jpeg, png', 
+        //     ]);
+        // }
         $product = Product::find($this->product_id);
         $product->name = $this->name ;
         $product->slug = $this->slug ;
@@ -176,8 +176,9 @@ class AdminEditProductComponent extends Component
         $product->save();
 
         //for product attribute
-        AttributeValue::where('product_id', $product->id)->delete();
-        foreach ($this->attribute_values as $key => $attribute_value) {
+        if(isset($this->attribute_values)){
+            AttributeValue::where('product_id', $product->id)->delete();
+            foreach ($this->attribute_values as $key => $attribute_value) {
             $a_values = explode(',', $attribute_value);
 
             foreach ($a_values as $avalue) {
@@ -187,6 +188,7 @@ class AdminEditProductComponent extends Component
                 $attr_value->product_id = $product->id;
                 $attr_value->save();
             }
+        }
         }
         session()->flash('message', 'Product has been changed !');
     }

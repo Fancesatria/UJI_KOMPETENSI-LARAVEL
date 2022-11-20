@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->decimal('subtotal');
             $table->decimal('discount')->default(0);
             $table->decimal('tax');
+            $table->decimal('delivery_charge');
             $table->decimal('total');
             $table->string('firstname');
             $table->string('lastname');
@@ -33,7 +34,8 @@ class CreateOrdersTable extends Migration
             $table->enum('status',['onprocess','delivered','canceled'])->default('onprocess');
             $table->boolean('is_shipping_different')->default(false);
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            
+            
         });
     }
 

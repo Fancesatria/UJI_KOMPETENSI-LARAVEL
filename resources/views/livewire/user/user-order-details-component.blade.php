@@ -93,6 +93,7 @@
                                         <div class="price-field sub-total"><p class="price">${{$item->price * $item->quantity}}</p></div>
                                         @if ($order->status == 'delivered' && $item->rstatus == false)
                                         <div class="price-field sub-total"><p class="price"><a href="{{ route('user.review',['order_item_id'=>$item->id])}}">Write Review</a></p></div>
+                                        <div class="price-field sub-total"><p class="price"><a href="{{ route('user.invoice',['order_id'=>$item->order_id])}}">Show Invoice</a></p></div>
                                         @endif
                                         
                                     </li>
@@ -103,9 +104,10 @@
                         <div class="summary">
                             <div class="order-summary">
                                 <h4 class="title-box">Order Summary</h4>
+                                <p class="summary-info"><span class="title">Shipping Agent</span><b class="index">${{ $order->shipping_agent }}</b></p>
                                 <p class="summary-info"><span class="title">Subtotal</span><b class="index">${{ $order->subtotal }}</b></p>
+                                <p class="summary-info"><span class="title">Shipping Charge</span><b class="index">${{ $order->shipping_charge }}</b></p>
                                 <p class="summary-info"><span class="title">Tax</span><b class="index">${{ $order->tax }}</b></p>
-                                <p class="summary-info"><span class="title">Shipping</span><b class="index">Free Shipping</b></p>
                                 <p class="summary-info"><span class="title">Total</span><b class="index">${{ $order->total }}</b></p>
                             </div>
                         </div>

@@ -8,9 +8,9 @@
 					<div class="item-slide">
 						<img src="{{ asset('assets/images/sliders') }}/{{$item->image}}" alt="" class="img-slide">
 						<div class="slide-info slide-1">
-							<h2 class="f-title"><b>{{ $item->title }}</b></h2>
-							<span class="subtitle">{{ $item->subtitle }}</span>
-							<p class="sale-info">Only price: <span class="price">${{$item->price}}</span></p>
+							<h2 class="f-title" style="text-align: left;"><b>{{ $item->title }}</b></h2>
+							<span class="subtitle" style="color: white">{{ $item->subtitle }}</span>
+							<p class="sale-info" style="color: white">Starts from: <span class="price" style="color: white">${{$item->price}}</span></p>
 							<a href="{{ $item->link}}" class="btn-link">Shop Now</a>
 						</div>
 					</div>
@@ -22,12 +22,12 @@
 			<div class="wrap-banner style-twin-default">
 				<div class="banner-item">
 					<a href="#" class="link-banner banner-effect-1">
-						<figure><img src="{{ asset('assets/images/home-1-banner-1.jpg') }}" alt="" width="580" height="190"></figure>
+						<figure><img src="{{ asset('assets/images/rsz_s1x.jpg') }}" alt="" width="580" height="200"></figure>
 					</a>
 				</div>
 				<div class="banner-item">
 					<a href="#" class="link-banner banner-effect-1">
-						<figure><img src="{{ asset('assets/images/home-1-banner-2.jpg') }}" alt="" width="580" height="190"></figure>
+						<figure><img src="{{ asset('assets/images/s2.jpg') }}" alt="" width="580" height="200"></figure>
 					</a>
 				</div>
 			</div>
@@ -65,7 +65,7 @@
 				<h3 class="title-box">Latest Products</h3>
 				<div class="wrap-top-banner">
 					<a href="#" class="link-banner banner-effect-2">
-						<figure><img src="{{ asset('assets/images/digital-electronic-banner.jpg') }}" width="1170" height="240" alt=""></figure>
+						<figure><img src="{{ asset('assets/images/bannerku3.jpg') }}" width="1170" height="240" alt=""></figure>
 					</a>
 				</div>
 				<div class="wrap-products">
@@ -99,7 +99,7 @@
 				<h3 class="title-box">Product Categories</h3>
 				<div class="wrap-top-banner">
 					<a href="#" class="link-banner banner-effect-2">
-						<figure><img src="{{ asset('assets/images/fashion-accesories-banner.jpg') }}" width="1170" height="240" alt=""></figure>
+						<figure><img src="{{ asset('assets/images/bannerku4.jpg') }}" width="1170" height="240" alt=""></figure>
 					</a>
 				</div>
 				<div class="wrap-products">
@@ -113,7 +113,7 @@
 							@foreach ($categories as $key=>$category)
 							<div class="tab-content-item {{ $key == 0 ? 'active':'' }}" id="category_{{$category->id}}">
 								<div class="wrap-products slide-carousel owl-carousel style-nav-1 equal-container" data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"4"},"1200":{"items":"5"}}' >
-									
+
 									@php
 										$c_product = DB::table('products')->where('category_id',$category->id)->get()->take($productNumber);
 									@endphp
@@ -136,7 +136,7 @@
 											</div>
 										</div>
 									@endforeach
-									
+
 								</div>
 							</div>
 							@endforeach
@@ -145,6 +145,11 @@
 				</div>
 			</div>
 
+            <div class="wa-chat">
+                <a href=" https://wa.me/6289617320859?text=Hello,%20I%20have%20some%20questions" target="_blank">
+                    <img src="{{ asset('assets/images/wa.png')}}" alt="whatsapp logo" width="55px" height="55px">
+                </a>
+            </div>
 		</div>
 
 	</main>

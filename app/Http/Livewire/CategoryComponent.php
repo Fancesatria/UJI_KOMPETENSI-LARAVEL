@@ -14,6 +14,8 @@ class CategoryComponent extends Component
     public $sorting;
     public $pagesize;
     public $category_slug;
+    public $minPrice;
+    public $maxPrice;
 
     //subcategories
     public $scategory_slug;
@@ -24,6 +26,9 @@ class CategoryComponent extends Component
         $this->pagesize = 12;
         $this->category_slug = $category_slug;
         $this->scategory_slug = $scategory_slug;
+
+        $this->minPrice = 1;
+        $this->maxPrice = 1000;
     }
 
     public function store($product_id, $product_name, $product_price)
@@ -31,6 +36,22 @@ class CategoryComponent extends Component
         Cart::add($product_id, $product_name, 1, $product_price)->associate('App\Models\Product');
         session()->flash('success_message', 'Item added in Cart');
         return redirect()->route('product.cart');
+    }
+
+    public function addToWishlist($product_id, $product_name, $product_price){
+        Cart::instance('wishlist')->add($product_id, $product_name,1, $product_price)->associate('App\Models\Product');
+        $this->emitTo('wishlist-count-component','refreshComponent');
+        // return redirect()->route('product.shop');
+    }
+
+    public function removeWishlist($product_id){
+        foreach(Cart::instance('wishlist')->content() as $witem){
+            if ($witem->id == $product_id) {
+                Cart::instance('wishlist')->remove($witem->rowId);
+                $this->emitTo('wishlist-count-component','refreshComponent');
+                return;
+            }
+        }
     }
 
     use WithPagination;
@@ -69,7 +90,7 @@ class CategoryComponent extends Component
         }
 
         $categories = Category::all();
-        
-        return view('livewire.category-component', ['products'=>$products, 'categories'=>$categories, 'category_name'=>$category_name])->layout('layouts.base');
+        $popular_products = Product::inRandomOrder()->limit(4)->get();
+        return view('livewire.category-component', ['products'=>$products, 'categories'=>$categories, 'category_name'=>$category_name, 'popular_products'=>$popular_products])->layout('layouts.base');
     }
 }

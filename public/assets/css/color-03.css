@@ -21,7 +21,7 @@
 .product-style-1 .product-info .wrap-btn a,
 .wrap-breadcrumb ul a:hover,
 .wrap-list-cate .list-cate li:not(.level-0):hover{
-    color: #38b04a;
+    color: #CFFF8D;
 }
 
 .widget a:hover,
@@ -42,7 +42,7 @@
 .wrap-product-widget  li.funtion-item a:hover::after,
 .widget.filter-widget .vertical-list li a::after
 {
-    color: #38b04a !important;
+    color: #CFFF8D !important;
 }
 
 .product-style-1 .product-info .wrap-btn a::after,
@@ -84,7 +84,7 @@
 .wrap-main-slide-3 .item-slide .wrap-banners .banner-link,
 /*.wrap-demo-item-1 figure::before,*/
 .main-info-area .right-section .wrap-icon-section.minicart .index{
-    background: #38b04a;
+    background: #CFFF8D;
 }
 .has-child-cate .toggle-control:hover::after,
 .has-child-cate .toggle-control:hover::before,
@@ -93,7 +93,7 @@
 .detail-media .flex-control-nav .owl-nav button:hover,
 .wrap-iten-in-cart .products-cart .quantity .quantity-input .btn:hover,
 .wrap-pagination-info .page-numbers li .page-number-item:hover{
-    background: #38b04a !important;
+    background: #CFFF8D !important;
 }
 .flex-control-thumbs img.flex-active,
 .wrap-product-detail .advance-info .tab-control a.active,
@@ -107,7 +107,7 @@
 .product-style-2:hover,
 .wrap-demo-item-1:hover img,
 .center-section .wrap-search-form{
-    border-color: #38b04a;
+    border-color: #CFFF8D;
 }
 .widget.widget-tag-clouds ul li a:hover,
 .product-list-style .advance-info .add-to-cart:hover,
@@ -119,11 +119,11 @@
 .aboutus-info.style-small-left .list-showups label input[type="radio"]:checked + span.check-box,
 .wrap-articles article .info a.btn-to-post:hover
 {
-    border-color: #38b04a !important;
+    border-color: #CFFF8D !important;
 }
 .wrap-footer-content .wrap-function-info .fc-info-item
 {
-    border-color: #399d48 !important;
+    border-color: #CFFF8D !important;
 }
 .wrap-footer-content .wrap-function-info .fc-info-item .wrap-left-info .fc-desc{
     color: #83e491 !important;
@@ -137,5 +137,5 @@
     background-color: #009000;
 }
 .fill-color.header-toggle .header-nav-section .menu-nav li a:hover{
-    color: #444444 !important;
+    color: #a6d861 !important;
 }

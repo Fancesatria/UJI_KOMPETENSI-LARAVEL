@@ -180,17 +180,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Sub Category</label>
-                                <div class="col-md-4">
-                                    <select name="" id="" class="form-control input-md" wire:model="scategory_id">
-                                        <option value="">Select Subcategory</option>
-                                        @foreach ($scategories as $item)
-                                            <option value="{{$item->id}}">{{$item->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Product Attribute</label>

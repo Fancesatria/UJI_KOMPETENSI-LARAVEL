@@ -6,9 +6,12 @@ use Cart;
 use Stripe;
 use App\Models\Order;
 use App\Mail\OrderMail;
+use App\Models\Country;
 use Livewire\Component;
+use App\Models\Category;
 use App\Models\Shipping;
 use App\Models\OrderItem;
+use App\Models\Expedition;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -50,6 +53,11 @@ class CheckoutComponent extends Component
     public $expYear;
     public $cvc;
 
+    //shipping
+    public $select_expedition;
+    public $shipping_charge;
+    
+
     public function updated($fields){
         $this->validateOnly($fields, [
             'firstname'=>'required',
@@ -61,7 +69,8 @@ class CheckoutComponent extends Component
             'province'=>'required',
             'country'=>'required',
             'zipcode'=>'required',
-            'payMethod'=>'required'
+            'payMethod'=>'required',
+            'select_expedition' => 'required'
         ]);
 
         if ($this->shipDifferentAddress) {
@@ -88,6 +97,7 @@ class CheckoutComponent extends Component
         }
     }
 
+    //Reset Cart
     public function resetCart(){
         //after doing checkout, the produc in cart will be disappear
         $this->thanks = 1;
@@ -95,6 +105,7 @@ class CheckoutComponent extends Component
         session()->forget('checkout');
     }
 
+    //make transaction
     public function makeTransaction($order_id, $status){
         $transaction = new Transaction();
             $transaction->user_id = Auth::user()->id;
@@ -102,6 +113,20 @@ class CheckoutComponent extends Component
             $transaction->mode = $this->payMethod;
             $transaction->status = $status;
             $transaction->save();
+    }
+
+    //set shipping charge
+    public function setShippingCharge(){
+        
+        if (isset($this->country)) {
+            $country_l = Country::where('distance_km', $this->country)->first()->distance_km;
+            $cost_km = Expedition::where('cost_perkm', $this->select_expedition)->first()->cost_perkm;
+            $this->shipping_charge = $cost_km * $country_l;
+
+        } else {
+            session()->flash('msg', 'Select the country first!');
+        }
+        
     }
 
     public function verifyForCheckout(){
@@ -133,15 +158,19 @@ class CheckoutComponent extends Component
             'province'=>'required',
             'country'=>'required',
             'zipcode'=>'required',
-            'payMethod'=>'required'
+            'payMethod'=>'required',
+            'select_expedition' => 'required'
         ]);
 
+        $selected_country = Country::where('distance_km', $this->country)->first()->country;
+        $exp_id = Expedition::where('cost_perkm', $this->select_expedition)->first()->id;
+        $exp_agent = Expedition::where('cost_perkm', $this->select_expedition)->first()->name;
         $order = new Order();
         $order->user_id = Auth::user()->id;
         $order->subtotal = session()->get('checkout')['subtotal'];
         $order->discount = session()->get('checkout')['discount'];
         $order->tax = session()->get('checkout')['tax'];
-        $order->total = session()->get('checkout')['total'];
+        $order->total = session()->get('checkout')['total'] + $this->shipping_charge;
 
         $order->firstname  = $this->firstname;
         $order->lastname = $this->lastname;
@@ -151,10 +180,13 @@ class CheckoutComponent extends Component
         $order->mobile = $this->mobile;
         $order->city = $this->city;
         $order->province = $this->province;
-        $order->country = $this->country;
+        $order->country = $selected_country;
         $order->zipcode = $this->zipcode;
         $order->status = 'onprocess';
         $order->is_shipping_different = $this->shipDifferentAddress ? 1:0; 
+        $order->expedition_id = $exp_id;
+        $order->shipping_charge = $this->shipping_charge;
+        $order->shipping_agent = $exp_agent;
         $order->save();
         
         foreach (Cart::instance('cart')->content() as $item) {
@@ -285,10 +317,15 @@ class CheckoutComponent extends Component
         $this->sendOrderConfirmationMail($order);
     }
 
+    // public function country($co){
+    //     $co = Country::all();
+    //     return $co;
+    // }
 
     public function render()
     {
         $this->verifyForCheckout();
-        return view('livewire.checkout-component')->layout('layouts.base');
+
+        return view('livewire.checkout-component',['co'=>Country::all(), 'expedition'=>Expedition::all()])->layout('layouts.base');
     }
 }

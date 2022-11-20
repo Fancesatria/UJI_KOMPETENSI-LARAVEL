@@ -24,7 +24,7 @@
 .product-style-1 .product-info .wrap-btn a,
 .wrap-breadcrumb ul a:hover,
 .center-section .wrap-search-form .wrap-list-cate .list-cate li:not(.level-0):hover{
-	color: #ff2832;
+	color: #557153;
 }
 
 .widget a:hover,
@@ -41,7 +41,7 @@
 .wrap-product-detail .detail-info .wrap-btn .btn:hover::before,
 .widget.filter-widget .vertical-list li a::after
 {
-	color: #ff2832 !important;
+	color: #557153 !important;
 }
 
 .product-style-1 .product-info .wrap-btn a::after,
@@ -72,7 +72,7 @@
 .summary-item .btn,
 .choose-payment-methods .payment-method input[type=radio]:checked + span::before,
 .main-info-area .right-section .wrap-icon-section.minicart .index{
-	background: #ff2832;
+	background: #557153;
 }
 .has-child-cate .toggle-control:hover::after,
 .has-child-cate .toggle-control:hover::before,
@@ -81,7 +81,7 @@
 .detail-media .flex-control-nav .owl-nav button:hover,
 .wrap-iten-in-cart .products-cart .quantity .quantity-input .btn:hover,
 .wrap-pagination-info .page-numbers li .page-number-item:hover{
-	background: #ff2832 !important;
+	background: #557153 !important;
 }
 .flex-control-thumbs img.flex-active,
 .wrap-product-detail .advance-info .tab-control a.active,
@@ -91,7 +91,7 @@
 .choose-payment-methods .payment-method input[type=radio]:checked + span::before,
 .wrap-demo-item-1:hover img,
 .center-section .wrap-search-form{
-	border-color: #ff2832;
+	border-color: #557153;
 }
 .widget.widget-tag-clouds ul li a:hover,
 .product-list-style .advance-info .add-to-cart:hover,
@@ -103,8 +103,8 @@
 .aboutus-info.style-small-left .list-showups label input[type="radio"]:checked + span.check-box,
 .wrap-articles article .info a.btn-to-post:hover,
 .wrap-footer-content .wrap-function-info .fc-info-item{
-	border-color: #ff3c45 !important;
+	border-color: #557153 !important;
 }
 .wrap-footer-content .wrap-function-info .fc-info-item .wrap-left-info .fc-desc{
-	color: #ffc2c4 !important;
+	color: #ddffdb !important;
 }
