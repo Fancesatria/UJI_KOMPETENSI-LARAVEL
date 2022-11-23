@@ -97,7 +97,7 @@
                                     </fieldset>
 
                                     <fieldset class="wrap-input" style="margin-top: 10px">
-                                        {!! NoCaptcha::renderJs() !!}
+                                        {!! NoCaptcha::renderJs('en') !!}
                                         {!! NoCaptcha::display() !!}
 									</fieldset>
                                     <input type="submit" class="btn btn-sign" value="Register" name="register">
@@ -113,3 +113,18 @@
     </main>
     <!--main area-->
 </x-base-layout>
+
+<script>
+    $("#frm-reg-pass").keypress(function(e) { 
+        var s = String.fromCharCode( e.which );
+        if ( s.toUpperCase() === s && s.toLowerCase() !== s && !e.shiftKey ) {
+            alert('Make sure your capslock is off');
+        }
+    });
+    $("#frm-reg-cfpass").keypress(function(e) { 
+        var s = String.fromCharCode( e.which );
+        if ( s.toUpperCase() === s && s.toLowerCase() !== s && !e.shiftKey ) {
+            alert('Make sure your capslock is off');
+        }
+    });
+</script>

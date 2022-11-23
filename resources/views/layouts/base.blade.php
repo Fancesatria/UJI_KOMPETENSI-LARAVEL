@@ -112,6 +112,36 @@
                                                     </form>
                                                 </ul>
                                             </li>
+                                            @elseif (Auth::user()->utype === 'EMP')
+                                            <li class="menu-item menu-item-has-children parent" >
+                                                <a title="My Account" href="#">My Account ( {{Auth::user()->name}} )<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                                <ul class="submenu curency" >
+                                                    <li class="menu-item" >
+                                                        <a title="Dashboard" href="{{ route('user.dashboard') }}">Dashboard</a>
+                                                    </li>
+
+                                                    <li class="menu-item">
+                                                        <a href="{{ route('admin.orders') }}" title="All Orders">All Orders</a>
+                                                    </li>
+
+                                                    <li class="menu-item">
+                                                        <a href="{{ route('admin.sale') }}" title="Sale Setting">Sale Settings</a>
+                                                    </li>
+
+                                                    <li class="menu-item">
+                                                        <a href="{{ route('admin.contacts') }}" title="Contact Message">Contact Message</a>
+                                                    </li>
+
+                                                    <li class="menu-item">
+                                                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                                    </li>
+
+                                                    <form id="logout-form" action="{{ route('logout') }}" method="post">
+                                                        @csrf
+
+                                                    </form>
+                                                </ul>
+                                            </li>
                                             @else
                                             <li class="menu-item menu-item-has-children parent" >
                                                 <a title="My Account" href="#">My Account ( {{Auth::user()->name}} )<i class="fa fa-angle-down" aria-hidden="true"></i></a>
@@ -233,10 +263,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.js" integrity="sha512-EnXkkBUGl2gBm/EIZEgwWpQNavsnBbeMtjklwAa7jLj60mJk932aqzXFmdPKCG6ge/i8iOCK0Uwl1Qp+S0zowg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         {{-- tinymce = texteditor for textarea --}}
         <script src="https://cdn.tiny.cloud/1/un6uebn6ylqt681bw5klrzgkmp39yiq2qj9o3q0em7fza3ly/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-        {{-- captcha v3 --}}
-        {{-- <script src="https://www.google.com/recaptcha/api.js?render=6LcV-A0jAAAAAKBm_zo6eahjvAwV4leHhkrnYyHa"></script> --}}
-        {{-- <script src="https://www.google.com/recaptcha/api.js"></script> --}}
-
         {{-- Chat --}}
         <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="9d4f1908-6f1d-4671-bb1f-1b4c879042c2";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
         @livewireScripts

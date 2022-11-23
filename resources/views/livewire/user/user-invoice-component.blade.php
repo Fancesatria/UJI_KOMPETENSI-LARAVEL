@@ -9,20 +9,6 @@
                             <div class="invoice-header">
                                 <!-- Row start -->
                                 <div class="row gutters">
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                        <div class="custom-actions-btns mb-5">
-                                            {{-- <a href="#" class="btn btn-primary">
-                                                <i class="icon-download"></i> Download
-                                            </a>
-                                            <a href="#" class="btn btn-secondary">
-                                                <i class="icon-printer"></i> Print
-                                            </a> --}}
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Row end -->
-                                <!-- Row start -->
-                                <div class="row gutters">
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                         <a href="index.html" class="invoice-logo">
                                             Adventure Store

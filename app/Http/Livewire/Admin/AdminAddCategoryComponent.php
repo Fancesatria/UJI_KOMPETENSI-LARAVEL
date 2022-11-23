@@ -21,7 +21,7 @@ class AdminAddCategoryComponent extends Component
     //untuk validasinya
     public function updated($fields){
         $this->validateOnly($fields, [
-            'name'=>'required',
+            'name'=>'required|alpha',
             'slug'=>'required | unique:categories'
         ]);
     }
@@ -30,8 +30,8 @@ class AdminAddCategoryComponent extends Component
     public function addCategory()
     {
         $this->validate([
-            'name'=>'required',
-            'slug'=>'required | unique:categories'
+            'name'=>'required|alpha',
+            'slug'=>'required | unique:categories|alpha'
         ]);
 
         if ($this->category_id) {

@@ -19,13 +19,13 @@ class AdminEditAttributeComponent extends Component
 
     public function updated($fields){
         $this->validateOnly($fields, [
-            'name'=>'required'
+            'name'=>'required|alpha'
         ]);
     }
 
     public function updateAttribute(){
         $this->validate([
-            'name'=>'required'
+            'name'=>'required|alpha'
         ]);
 
         $editAttribute = ProductAttribute::find($this->attribute_id);

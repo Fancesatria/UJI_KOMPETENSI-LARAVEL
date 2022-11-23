@@ -64,8 +64,8 @@ class AdminAddProductComponent extends Component
 
     public function updated($fields){
         $this->validateOnly($fields, [
-            'name'=>'required',
-            'slug'=>'required | unique:products',
+            'name'=>'required|alpha_num',
+            'slug'=>'required | unique:products|alpha_num',
             'short_desc'=>'required',
             'description'=>'required',
             'regular_price'=>'required | numeric',
@@ -80,8 +80,8 @@ class AdminAddProductComponent extends Component
 
     public function addProduct(){
         $this->validate([
-            'name'=>'required',
-            'slug'=>'required | unique:products',
+            'name'=>'required |alpha_num',
+            'slug'=>'required | unique:products|alpha_num',
             'short_desc'=>'required',
             'description'=>'required',
             'regular_price'=>'required | numeric',

@@ -104,7 +104,7 @@
                         <div class="summary">
                             <div class="order-summary">
                                 <h4 class="title-box">Order Summary</h4>
-                                <p class="summary-info"><span class="title">Shipping Agent</span><b class="index">${{ $order->shipping_agent }}</b></p>
+                                <p class="summary-info"><span class="title">Shipping Agent</span><b class="index">{{ $order->shipping_agent }}</b></p>
                                 <p class="summary-info"><span class="title">Subtotal</span><b class="index">${{ $order->subtotal }}</b></p>
                                 <p class="summary-info"><span class="title">Shipping Charge</span><b class="index">${{ $order->shipping_charge }}</b></p>
                                 <p class="summary-info"><span class="title">Tax</span><b class="index">${{ $order->tax }}</b></p>

@@ -19,6 +19,8 @@ class AuthAdmin
     {
         if(Auth::user()->utype === 'ADM'){
             return $next($request);
+        } else if(Auth::user()->utype === 'EMP'){
+            return $next($request);
         } else {
             session()->flush();
             return redirect()->route('login');

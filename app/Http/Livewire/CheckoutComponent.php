@@ -327,6 +327,6 @@ class CheckoutComponent extends Component
     {
         $this->verifyForCheckout();
 
-        return view('livewire.checkout-component',['co'=>Country::all(), 'expedition'=>Expedition::all()])->layout('layouts.base');
+        return view('livewire.checkout-component',['co'=>Country::orderBy('country','ASC')->get(), 'expedition'=>Expedition::orderBy('cost_perkm','ASC')->get()])->layout('layouts.base');
     }
 }

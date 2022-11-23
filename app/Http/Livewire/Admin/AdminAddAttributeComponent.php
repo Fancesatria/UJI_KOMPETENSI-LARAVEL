@@ -11,13 +11,13 @@ class AdminAddAttributeComponent extends Component
 
     public function updated($fields){
         $this->validateOnly($fields, [
-            'name'=>'required'
+            'name'=>'required|alpha'
         ]);
     }
 
     public function storeAttribute(){
         $this->validate([
-            'name'=>'required'
+            'name'=>'required|alpha'
         ]);
 
         $attribute = new ProductAttribute();

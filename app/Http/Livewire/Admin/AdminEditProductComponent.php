@@ -80,8 +80,8 @@ class AdminEditProductComponent extends Component
 
     public function updated($fields){
         $this->validateOnly($fields,[
-            'name'=>'required',
-            'slug'=>'required',
+            'name'=>'required|alpha',
+            'slug'=>'required|alpha',
             'short_desc'=>'required',
             'description'=>'required',
             'regular_price'=>'required | numeric',
@@ -114,8 +114,8 @@ class AdminEditProductComponent extends Component
     public function editProduct()
     {
         $this->validate([
-            'name'=>'required',
-            'slug'=>'required',
+            'name'=>'required|alpha',
+            'slug'=>'required|alpha',
             'short_desc'=>'required',
             'description'=>'required',
             'regular_price'=>'required | numeric',
